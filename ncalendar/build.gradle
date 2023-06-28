@@ -22,23 +22,14 @@ dependencies {
     api 'joda-time:joda-time:2.10.1'
 }
 
-
-//publish {
-//    userOrg = 'necerr'//bintray.com用户名
-//    repoName = 'maven'//bintray仓库
-//    groupId = 'com.necer.ncalendar'//jcenter上的路径
-//    artifactId = 'ncalendar'//项目名称
-//    publishVersion = '5.0.2'//版本号
-//    desc = 'NCalendar'
-//    website = 'https://github.com/yannecer/NCalendar'
-//}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
+afterEvaluate {
+    android.libraryVariants.each { variant ->
+        publishing.publications.create(variant.name, MavenPublication) {
+            from components.findByName(variant.name)
             groupId = 'com.sanjeevirajm.ncalendar'
-            artifactId = 'ncalendar'
-            version = '1.1'
+            artifactId = "ncalendar"
+            version = '5.0.3'
         }
     }
 }
+
